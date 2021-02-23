@@ -20,11 +20,12 @@ public class Dialogo extends JDialog implements ActionListener {
 	public ElencoStudenti elenco;
 
 	
-	public Dialogo(boolean bol, JFrame f) {
+	public Dialogo(boolean bol, JFrame f,ElencoStudenti elenco) {
 		super(f,bol);
 		initC();
 		this.setSize(600,600);
 		this.setVisible(true);
+		this.elenco=elenco;
 	}
 
 	private void initC() {
@@ -48,6 +49,7 @@ public class Dialogo extends JDialog implements ActionListener {
 		this.add(l4);this.add(t4);//mi serve combobox 
 		this.add(b1);this.add(b2);
 		s=new Studente();
+		elenco=new ElencoStudenti();
 	}
 
 	@Override
@@ -58,7 +60,9 @@ public class Dialogo extends JDialog implements ActionListener {
 		
 		if(e.getSource().equals(b1)) {
 			s=new Studente(t1.getText(),t2.getText(),t3.getText(),t4.getText());
-			
+			elenco.add(s);
+			System.out.print(elenco.size());
+			this.dispose();
 		}
 		
 	}

@@ -29,6 +29,14 @@ public class ElencoStudenti extends ArrayList<Studente> {
 				}
 				fw.flush();
 				fw.close();
+				/*FileWriter fw = null;
+				try {
+					fw = new FileWriter(f);
+					for(String line : a) {
+						fw.write(line+"\n");
+						
+					}			
+				}*/
 				
 			} catch (IOException e) {
 				e.printStackTrace();

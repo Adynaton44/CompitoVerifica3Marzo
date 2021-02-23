@@ -15,19 +15,17 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 public class Finestra extends JFrame implements ActionListener, MouseListener{
 	
 	private JMenuBar barra;
 	private JMenu menu;
-	private JMenuItem nuovo,salva;
+	private JMenuItem nuovo,salva,importa,aggiorna;
 	private JPanel pannello;
 	private JTable table;
 	private DefaultTableModel dtm;
 	private JLabel foto;
-	private JTextField t1,t2;
 	private Dialogo pd;
 	private ElencoStudenti elenco;
 	private ImageIcon icon;
@@ -46,8 +44,14 @@ public class Finestra extends JFrame implements ActionListener, MouseListener{
 		nuovo.addActionListener(this);
 		salva = new JMenuItem("Salva");
 		salva.addActionListener(this);
+		importa=new JMenuItem("Importa");
+		importa.addActionListener(this);
+		aggiorna=new JMenuItem("Aggiorna Tabella");
+		aggiorna.addActionListener(this);
 		menu.add(nuovo);
 		menu.add(salva);
+		menu.add(importa);
+		menu.add(aggiorna);
 		barra.add(menu);
 		this.setJMenuBar(barra);
 		
@@ -72,13 +76,34 @@ public class Finestra extends JFrame implements ActionListener, MouseListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if(e.getSource().equals(nuovo)) {
+			pd = new Dialogo(true, this, elenco);
+		}
 		
+		if(e.getSource().equals(salva)) {
+			elenco.scrivicsv(this);
+		}
+		if(e.getSource().equals(importa)) {
+			elenco.importacsv(this);
+		}
+		if(e.getSource().equals(aggiorna)) {
+			int n=elenco.size()-1;
+			dtm.addRow(new String[] {elenco.get(n).getCognome(),elenco.get(n).getNome(),elenco.get(n).getClasse()});
+		}//sembra che ogni volta l'elenco riparta da 0 elementi... come mai?
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getSource().equals(table)) {
+			if(table.getSelectedRow() != -1) {
+				int i = table.getSelectedRow();
+				if(elenco.get(i) != null) {
+					Studente p = elenco.get(i);
+					icon=new ImageIcon(p.getPath());
+					foto=new JLabel(icon);
+				}
+			}
+		}
 	}
 
 	@Override
