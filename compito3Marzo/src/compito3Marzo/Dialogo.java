@@ -45,7 +45,7 @@ public class Dialogo extends JDialog implements ActionListener {
 		this.add(l1);this.add(t1);
 		this.add(l2);this.add(t2);
 		this.add(l3);this.add(t3);
-		this.add(l4);this.add(t4);
+		this.add(l4);this.add(t4);//mi serve combobox 
 		this.add(b1);this.add(b2);
 		s=new Studente();
 	}
