@@ -20,12 +20,11 @@ public class Dialogo extends JDialog implements ActionListener {
 	public ElencoStudenti elenco;
 
 	
-	public Dialogo(boolean bol, JFrame f,ElencoStudenti elenco) {
+	public Dialogo(boolean bol, JFrame f) {
 		super(f,bol);
 		initC();
 		this.setSize(600,600);
 		this.setVisible(true);
-		this.elenco=elenco;
 	}
 
 	private void initC() {
@@ -55,16 +54,18 @@ public class Dialogo extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource().equals(b2));
-		dispose();
+		if(e.getSource().equals(b2)) {
+			dispose();
+		}
 		
 		if(e.getSource().equals(b1)) {
 			s=new Studente(t1.getText(),t2.getText(),t3.getText(),t4.getText());
-			elenco.add(s);
-			System.out.print(elenco.size());
-			this.dispose();
 		}
 		
+	}
+	
+	public Studente ritorna() {
+		return s;
 	}
 
 }

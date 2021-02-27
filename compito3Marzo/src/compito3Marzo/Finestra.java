@@ -31,7 +31,7 @@ public class Finestra extends JFrame implements ActionListener, MouseListener{
 	private ImageIcon icon;
 	private JScrollPane jsp;
 
-	
+	//non ho messo la combobox perché sono pirla
 	public Finestra() {
 		initMenu();
 	}
@@ -77,7 +77,8 @@ public class Finestra extends JFrame implements ActionListener, MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource().equals(nuovo)) {
-			pd = new Dialogo(true, this, elenco);
+			pd = new Dialogo(true, this);
+			elenco.add(pd.ritorna());
 		}
 		
 		if(e.getSource().equals(salva)) {
@@ -87,9 +88,11 @@ public class Finestra extends JFrame implements ActionListener, MouseListener{
 			elenco.importacsv(this);
 		}
 		if(e.getSource().equals(aggiorna)) {
-			int n=elenco.size()-1;
-			dtm.addRow(new String[] {elenco.get(n).getCognome(),elenco.get(n).getNome(),elenco.get(n).getClasse()});
-		}//sembra che ogni volta l'elenco riparta da 0 elementi... come mai?
+			dtm.setRowCount(0);
+			for(int i=0;i<elenco.size();i++) {
+				dtm.addRow(new String[] {elenco.get(i).getCognome(),elenco.get(i).getNome(),elenco.get(i).getClasse()});
+			}
+		}
 	}
 
 	@Override
